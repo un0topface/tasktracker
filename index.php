@@ -1,6 +1,6 @@
 <?php
 
-session_start();
+define('APPLICATION_ENV', 'prod');
 
 // базовая директория приложения
 $baseDir = __DIR__ . '/';
@@ -9,8 +9,6 @@ $baseDir = __DIR__ . '/';
 include $baseDir . 'vendor/autoload.php';
 
 // создаем объект с приложением
-$Application = new \Lib\Application\Application($baseDir);
-// сетим конфиг
-$Application->setConfigDir($baseDir . 'config/prod/');
+$Application = new \Lib\Application\Application($baseDir, APPLICATION_ENV);
 // запускаем приложение
 $Application->run();

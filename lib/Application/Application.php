@@ -2,6 +2,7 @@
 
 namespace Lib\Application;
 
+use Lib\Config\Config;
 use Lib\Controller\AbstractController;
 use Lib\Controller\Exception\NotAuthorizedException;
 
@@ -10,9 +11,9 @@ use Lib\Controller\Exception\NotAuthorizedException;
  */
 class Application {
     /**
-     * @var string папка конфига приложения
+     * @var string среда приложения
      */
-    protected $configDir = '';
+    protected $applicationEnvironment = '';
 
     /**
      * @var string базовая директория приложения
@@ -21,27 +22,32 @@ class Application {
 
     /**
      * Application constructor.
-     * @param $baseDir
+     * @param string $baseDir
+     * @param string $applicationEnvironment dev|prod
      */
-    public function __construct($baseDir) {
+    public function __construct($baseDir, $applicationEnvironment) {
         $this->setBaseDir($baseDir);
+        $this->setApplicationEnvironment($applicationEnvironment);
+
+        // настраиваем конфиг приложения
+        Config::getInstance()->setApplication($this);
     }
 
     /**
-     * Геттер папки конфига приложения
-     * @return array
+     * Геттер среды запущенного приложения
+     * @return string
      */
-    public function getConfigDir() {
-        return $this->configDir;
+    public function getApplicationEnvironment() {
+        return $this->applicationEnvironment;
     }
 
     /**
-     * Сеттер папки конфига приложения
-     * @param string $configDir
+     * Сеттер среды запщуенного приложения
+     * @param string $applicationEnvironment
      * @return $this
      */
-    public function setConfigDir($configDir) {
-        $this->configDir = (string) $configDir;
+    protected function setApplicationEnvironment($applicationEnvironment) {
+        $this->applicationEnvironment = (string) $applicationEnvironment;
         return $this;
     }
 
