@@ -12,7 +12,9 @@ RUN chsh -s /bin/bash www-data
 
 ADD ./build /build
 
-RUN cp /build/configDir/www.profile /var/www/.profile
+RUN cp /build/config/www.profile /var/www/.profile
+RUN rm -rf /etc/nginx/sites-enabled/app.conf
+RUN cp /build/config/tasktracker.nginx.conf /etc/nginx/sites-enabled
 
 RUN apt-get update \
     && apt-get install -y wget php5-pgsql realpath git mc rsync vim \
