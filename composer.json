@@ -1,0 +1,24 @@
+{
+  "name": "diploma/tasktracker",
+  "description": "test",
+
+  "authors": [
+    {
+      "name": "Andrew Nuzha",
+      "email": "a@b.com"
+    }
+  ],
+
+  "require": {
+    "twig/twig": "*"
+  },
+
+  "minimum-stability": "stable",
+
+  "autoload": {
+    "psr-4": {
+      "TaskTracker\\": "src/",
+      "Lib\\": "lib/"
+    }
+  }
+}
