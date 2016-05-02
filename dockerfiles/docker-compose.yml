@@ -23,4 +23,7 @@ services:
         - "80:80"
         - "2228:22"
       environment:
+        # среда запуска prod|dev
+        APPLICATION_ENV: "prod"
+        # ssh ключ
         DEV_SSH_PUBKEY: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCZUEwnZBgwy3Ox6Ljid1pK2QAM3q/Gshg2d8XlayYkLhKdRvW98FoxMfIXFhunf7EjIU4EHHOhUodt1LzdCYMPqjkvIXDYfDJtnlCYes4kjsdbdvKPWI75V/auJ+Gwwey3uTd0EJapUn7fWSoXwFAWv7qX3+oTaH+L4/+t2fKdzxeafiVCIjpmfTFuQqL1stYLDhj0NfcBok4WTEb3QLxf2oqBVNp3llILT2q1liGIW6IJmqxQ9jjq3tKrbJyCzuEKRPZ2JsISDtjgeiUA8o5Ut+CPjyAFEymtCuZ/W3giCkBNzY5ZAnlQIOV2zDBIepoU4CMLm4s/vU8ZNMRMFKpcmO/W0XPAMbRFvvxelAdk6zw5NZetKLVMKc/J847ETzAWn/o+D+j3OGBo41tnmzJYF3c2DskHoJFaGA9/qlw94broanbzenJO8uh9HS5hg6JRPwC0UlZ+/t6/AWrlDUEIh+WB8LlywHjIQifKDbftdSWxX/D7aaCSLZ5xSFur7n9Y4Ky4XXDpJDoC/1tJn1oexF1O2hkWmBi8lcUuWqVVtyZvxfdAQCy9zXr2wvX3I5CNwrokbJc6Dpd9R3v9BQvvgKSaQYi9QQRlHEjpSsK8TzhluOpZzgyajmXug1g+KDxAq6p6qdFs0TchR5r3KBx1bR5dH7TA6+c+mOsv2FfKJQ== y.myskin@topface.com"

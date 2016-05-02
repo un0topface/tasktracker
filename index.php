@@ -1,6 +1,6 @@
 <?php
 
-define('APPLICATION_ENV', 'prod');
+define('APPLICATION_ENV', getenv('APPLICATION_ENV'));
 
 // базовая директория приложения
 $baseDir = __DIR__ . '/';
