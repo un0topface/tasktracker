@@ -2,8 +2,9 @@
 
 return [
     'main'    =>  [
-        'dbname'    =>  'tasktracker',
         'host'      =>  'tasktracker-postgres',
+        'port'      =>  '5432',
+        'database'  =>  'task_tracker',
         'username'  =>  'postgres',
         'password'  =>  '',
     ],

@@ -17,7 +17,8 @@ RUN rm -rf /etc/nginx/sites-enabled/app.conf
 RUN cp /build/config/tasktracker.nginx.conf /etc/nginx/sites-enabled
 
 RUN apt-get update \
-    && apt-get install -y wget php5-pgsql realpath git mc rsync vim \
+    && /build/php.sh \
+    && apt-get install -y wget realpath git mc rsync vim \
     && /build/ssh.sh \
     && rm -rf /build
 

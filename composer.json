@@ -10,7 +10,8 @@
   ],
 
   "require": {
-    "twig/twig": "*"
+    "twig/twig": "*",
+    "alxmsl/Connection": "*"
   },
 
   "minimum-stability": "stable",

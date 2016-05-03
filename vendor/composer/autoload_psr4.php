@@ -6,6 +6,8 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'alxmsl\\Connection\\' => array($vendorDir . '/alxmsl/connection/source'),
     'TaskTracker\\' => array($baseDir . '/src'),
+    'Predis\\' => array($vendorDir . '/predis/predis/src'),
     'Lib\\' => array($baseDir . '/lib'),
 );

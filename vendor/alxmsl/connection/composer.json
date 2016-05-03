@@ -1,0 +1,28 @@
+{
+    "name": "alxmsl/connection",
+    "description": "Simple library for support storage connections",
+    "keywords": ["redis", "postgres", "PostgreSQL", "predis", "phpredis"],
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "alxmsl",
+            "email": "alexey.y.maslov@gmail.com"
+        }
+    ],
+    "support": {
+        "email": "alexey.y.maslov@gmail.com",
+        "issues": "https://github.com/alxmsl/Connection/issues"
+    },
+    "autoload": {
+        "psr-4": {"alxmsl\\Connection\\": "source/"}
+    },
+    "require":{
+        "predis/predis": "1.0.*"
+    },
+    "autoload-dev": {
+        "psr-4": {"alxmsl\\Connection\\Tests\\": "tests/"}
+    },
+    "require-dev":{
+        "phpunit/phpunit": "4.4.*"
+    }
+}

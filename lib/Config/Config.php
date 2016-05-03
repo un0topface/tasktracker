@@ -5,6 +5,7 @@ namespace Lib\Config;
 use Lib\Application\Application;
 use Lib\Config\Exception\ConfigNotFoundException;
 use Lib\Traits\SingletonTrait;
+use RuntimeException;
 
 /**
  * Класс конфига приложения
@@ -30,6 +31,11 @@ final class Config {
      * @throws ConfigNotFoundException
      */
     public function get($configName, $option = null) {
+        // приложение должно быть назначено
+        if (empty($this->getApplication())) {
+            throw new RuntimeException('Application must be created before config');
+        }
+
         // если есть в кэше - возвращаем из кэша
         if (!isset($configMap[$configName])) {
             // папка с конфигом данного приложения
@@ -43,7 +49,7 @@ final class Config {
             if (file_exists($configFile = sprintf('%s/%s.php', $configFolder, $configName))) {
                 // если файл существует для конкретной среды исполнения, то считываем в кэш его
                 $this->configMap[$configName] = include $configFile;
-            } elseif (file_exists($configFile = sprintf('%s/../%s.php', $configFolder, $configName))) {
+            } elseif (file_exists($configFile = sprintf('%s../%s.php', $configFolder, $configName))) {
                 // иначе смотрим в директорию выше - конфигов для всех сред исполнения
                 $this->configMap[$configName] = include $configFile;
             } else {
