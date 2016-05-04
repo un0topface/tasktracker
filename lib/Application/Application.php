@@ -5,7 +5,6 @@ namespace Lib\Application;
 use Lib\Config\Config;
 use Lib\Controller\AbstractController;
 use Lib\Controller\Exception\NotAuthorizedException;
-use alxmsl\Connection\Postgresql\Connection;
 
 /**
  * Базовый класс приложения

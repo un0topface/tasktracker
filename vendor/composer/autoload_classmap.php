@@ -10,6 +10,7 @@ return array(
     'Lib\\Application\\Exception\\ApplicationException' => $baseDir . '/lib/Application/Exception/ApplicationException.php',
     'Lib\\Config\\Config' => $baseDir . '/lib/Config/Config.php',
     'Lib\\Config\\Exception\\ConfigNotFoundException' => $baseDir . '/lib/Config/Exception/ConfigNotFoundException.php',
+    'Lib\\Connection\\ConnectionFactory\\ConnectionFactory' => $baseDir . '/lib/Connection/ConnectionFactory.php',
     'Lib\\Controller\\AbstractController' => $baseDir . '/lib/Controller/AbstractController.php',
     'Lib\\Controller\\AuthorizedController' => $baseDir . '/lib/Controller/AuthorizedController.php',
     'Lib\\Controller\\BaseController' => $baseDir . '/lib/Controller/BaseController.php',

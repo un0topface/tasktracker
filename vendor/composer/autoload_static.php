@@ -59,6 +59,7 @@ class ComposerStaticInitdc8ce4d01df3ed17798e38ad31a816ce
         'Lib\\Application\\Exception\\ApplicationException' => __DIR__ . '/../..' . '/lib/Application/Exception/ApplicationException.php',
         'Lib\\Config\\Config' => __DIR__ . '/../..' . '/lib/Config/Config.php',
         'Lib\\Config\\Exception\\ConfigNotFoundException' => __DIR__ . '/../..' . '/lib/Config/Exception/ConfigNotFoundException.php',
+        'Lib\\Connection\\ConnectionFactory\\ConnectionFactory' => __DIR__ . '/../..' . '/lib/Connection/ConnectionFactory.php',
         'Lib\\Controller\\AbstractController' => __DIR__ . '/../..' . '/lib/Controller/AbstractController.php',
         'Lib\\Controller\\AuthorizedController' => __DIR__ . '/../..' . '/lib/Controller/AuthorizedController.php',
         'Lib\\Controller\\BaseController' => __DIR__ . '/../..' . '/lib/Controller/BaseController.php',

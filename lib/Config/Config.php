@@ -49,7 +49,7 @@ final class Config {
             if (file_exists($configFile = sprintf('%s/%s.php', $configFolder, $configName))) {
                 // если файл существует для конкретной среды исполнения, то считываем в кэш его
                 $this->configMap[$configName] = include $configFile;
-            } elseif (file_exists($configFile = sprintf('%s../%s.php', $configFolder, $configName))) {
+            } elseif (file_exists($configFile = sprintf('%s/../%s.php', $configFolder, $configName))) {
                 // иначе смотрим в директорию выше - конфигов для всех сред исполнения
                 $this->configMap[$configName] = include $configFile;
             } else {
