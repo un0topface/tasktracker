@@ -13,15 +13,22 @@ services:
       ports:
         - "6379:6379"
       hostname: tasktracker-redis
+  mongo:
+      image: mongo:3.2.6
+      ports:
+        - "27017:27017"
+      hostname: tasktracker-mongo
   task_tracker:
       image: un00/tasktracker:2016-05-01
       hostname: tasktracker
       extra_hosts:
         - "tasktracker-postgres:192.168.99.100"
         - "tasktracker-redis:192.168.99.100"
+        - "tasktracker-mongo:192.168.99.100"
       links:
-        - db:postgres
-        - redis:redis
+        - db
+        - redis
+        - mongo
       ports:
         - "80:80"
         - "2228:22"

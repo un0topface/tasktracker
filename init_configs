@@ -1,7 +1,0 @@
-#!/bin/sh
-
-set -e
-
-sudo composer install -o
-sudo /etc/init.d/php5-fpm restart
-sudo /etc/init.d/nginx   restart
