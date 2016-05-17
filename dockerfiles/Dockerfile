@@ -31,4 +31,4 @@ WORKDIR /var/www/app/
 COPY ./build/docker-entrypoint.sh /
 
 EXPOSE 22 80 433
-CMD ["/docker-entrypoint.sh"]
+ENTRYPOINT ["/docker-entrypoint.sh"]

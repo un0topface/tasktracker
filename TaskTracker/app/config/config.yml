@@ -63,9 +63,9 @@ doctrine:
 doctrine_mongodb:
     connections:
         default:
-            server: mongodb://tasktracker-mongodb:27017
+            server: mongodb://tasktracker-mongo:27017
             options: {}
-    default_database: name tasktracker-mongo
+    default_database: tasktracker-mongo
     document_managers:
         default:
             auto_mapping: true
@@ -76,3 +76,8 @@ swiftmailer:
     username:  "%mailer_user%"
     password:  "%mailer_password%"
     spool:     { type: memory }
+
+fos_user:
+    db_driver: mongodb
+    firewall_name: main
+    user_class: AppBundle\Document\User

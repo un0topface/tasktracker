@@ -1,13 +1,13 @@
 version: '2'
 
 services:
-  db:
-      image: postgres:9.5
-      environment:
-        POSTGRES_DB: task_tracker
-      ports:
-        - "5432:5432"
-      hostname: tasktracker-postgres
+#  db:
+#      image: postgres:9.5
+#      environment:
+#        POSTGRES_DB: task_tracker
+#      ports:
+#        - "5432:5432"
+#      hostname: tasktracker-postgres
   redis:
       image: redis:3.0.7
       ports:
@@ -26,7 +26,7 @@ services:
         - "tasktracker-redis:192.168.99.100"
         - "tasktracker-mongo:192.168.99.100"
       links:
-        - db
+#        - db
         - redis
         - mongo
       ports:
