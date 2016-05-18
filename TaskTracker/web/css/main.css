@@ -1,0 +1,120 @@
+.main-content {
+    font-family: 'Muli', 'Helvetica Neue', helvetica, arial;
+    max-width: 1100px;
+    margin: 10px auto 0;
+}
+
+.authorization {
+    max-width: 300px;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.authorization a.link {
+    float: right;
+}
+
+.profile-item .pull-left {
+    padding-right: 50px;
+}
+
+.profile-item .online {
+    width: 10px;
+    height: 10px;
+    background-color: #919191;
+    border-radius: 50%;
+    position: relative;
+    margin: 4px 5px 0px;
+    display: inline-block;
+}
+
+.profile-item .online-active {
+    background-color: #00ff84;
+}
+
+.profile-item .online-time {
+    font-size: 0.8em;
+    font-weight: normal;
+}
+
+.agency-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/**
+ * link and caption are hidden by default (on unitialized photo)
+ */
+.file-preview-frame .inner-default {
+    display: none;
+}
+
+.file-preview-frame .inner-notdefault {
+    display: none;
+}
+
+/**
+ * hide incompatible link and caption on initialized photo
+ */
+.file-preview-frame.outer-notdefault .inner-default {
+    display: none;
+}
+
+.file-preview-frame.outer-default .inner-notdefault {
+    display: none;
+}
+
+/**
+ * show compatible link and caption on initialized photo
+ */
+.file-preview-frame.outer-notdefault .inner-notdefault {
+    display: inline;
+}
+
+.file-preview-frame.outer-default .inner-default {
+    display: inline;
+}
+
+.operator-profile-photo {
+    width: 50px;
+    height: 50px;
+    padding-right: 5px;
+}
+.table>tbody>tr:first-child>td {
+    border-top: 0;
+}
+
+.bomb-message {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+}
+
+.bomb-panel {
+    display: inline-block;
+    vertical-align: top;
+    max-width: 260px;
+    margin-left: 35px;
+}
+
+.popover-content {
+    word-wrap: break-word;
+}
+
+.nav > li > a > i {
+    padding-right: 10px;
+}
+
+.login-errors {
+    max-width: 400px;
+    margin: 20px auto;
+    overflow: hidden;
+    text-align: center;
+}
