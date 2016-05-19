@@ -5,7 +5,6 @@ namespace AppBundle\Document;
 use DateTime;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
-use MongoTimestamp;
 
 /**
  * @MongoDB\Document

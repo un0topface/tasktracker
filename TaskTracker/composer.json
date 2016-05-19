@@ -23,7 +23,9 @@
         "incenteev/composer-parameter-handler": "^2.0",
         "doctrine/mongodb-odm": "~1.0",
         "doctrine/mongodb-odm-bundle": "~3.0",
-        "friendsofsymfony/user-bundle": "dev-master"
+        "friendsofsymfony/user-bundle": "dev-master",
+        "ismaambrosi/generator-bundle": "^2.5",
+        "symfony/options-resolver": "^3.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "^3.0",

@@ -5,36 +5,29 @@
 {% block title %}{{ parent() }} | Авторизация{% endblock %}
 
 {% block fos_user_content %}
-    <div class="main-content">
-        {% if error %}
-            <div class="alert alert-danger login-errors">
-                {{ error.messageKey|trans(error.messageData, 'security') }}
-            </div>
-        {% endif %}
-        <div class="authorization">
-            <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
-                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-
-                <div class="form-group">
-                    <label for="username" class="control-label">{{ 'security.login.username'|trans }}</label>
-                    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" />
-
-                    <label for="password" class="control-label">{{ 'security.login.password'|trans }}</label>
-                    <input type="password" id="password" name="_password" required="required" class="form-control" />
-
-                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" style="display:none;"/>
-                </div>
-                <div class="form-group">
-                    <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="form-control" />
-                </div>
-            </form>
-
-            <!--<a href="/sign-up" class="link">Sign Up</a>-->
+    {% if error %}
+        <div class="alert alert-danger login-errors">
+            {{ error.messageKey|trans(error.messageData, 'security') }}
         </div>
-    </div>
-    <div class="container">
+    {% endif %}
+    <div class="authorization">
         <form action="{{ path("fos_user_security_check") }}" method="post" class="form-signin">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
+            <div class="form-group">
+                <label for="username" class="control-label">{{ 'security.login.username'|trans }}</label>
+                <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" />
+
+                <label for="password" class="control-label">{{ 'security.login.password'|trans }}</label>
+                <input type="password" id="password" name="_password" required="required" class="form-control" />
+
+                <input type="checkbox" id="remember_me" name="_remember_me" value="on" style="display:none;"/>
+            </div>
+            <div class="form-group">
+                <input type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" class="btn btn-primary btn-block" />
+            </div>
         </form>
+
+        <!--<a href="/sign-up" class="link">Sign Up</a>-->
     </div>
 {% endblock fos_user_content %}
