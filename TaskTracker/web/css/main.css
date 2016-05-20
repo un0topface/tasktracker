@@ -118,3 +118,7 @@
     overflow: hidden;
     text-align: center;
 }
+
+.project-list {
+    width: 300px;
+}

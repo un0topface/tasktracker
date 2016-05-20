@@ -6,7 +6,7 @@ use DateTime;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\Document
+ * @MongoDB\Document(repositoryClass="AppBundle\Repository\TaskRepository")
  * @MongoDB\HasLifecycleCallbacks()
  */
 class Task {
@@ -40,6 +40,12 @@ class Task {
     protected $performer;
 
     /**
+     * @MongoDB\ReferenceOne(targetDocument="Project")
+     * @var Project
+     */
+    protected $project;
+
+    /**
      * @MongoDB\String
      * @var string
      */
@@ -56,6 +62,12 @@ class Task {
      * @var string
      */
     protected $deadline;
+
+    /**
+     * @MongoDB\Float
+     * @var float
+     */
+    protected $timeHoursEstimate;
 
     /**
      * @MongoDB\Integer
@@ -87,8 +99,6 @@ class Task {
      * Task constructor.
      */
     public function __construct() {
-        parent::__construct();
-        // your own logic
     }
 
     /**
@@ -196,9 +206,11 @@ class Task {
 
     /**
      * @param User $customer
+     * @return $this
      */
     public function setCustomer($customer) {
         $this->customer = $customer;
+        return $this;
     }
 
     /**
@@ -210,9 +222,11 @@ class Task {
 
     /**
      * @param User $performer
+     * @return $this
      */
     public function setPerformer($performer) {
         $this->performer = $performer;
+        return $this;
     }
 
     /**
@@ -224,9 +238,11 @@ class Task {
 
     /**
      * @param int $priorityLevel
+     * @return $this
      */
     public function setPriorityLevel($priorityLevel) {
         $this->priorityLevel = $priorityLevel;
+        return $this;
     }
 
     /**
@@ -238,8 +254,42 @@ class Task {
 
     /**
      * @param int $progress
+     * @return $this
      */
     public function setProgress($progress) {
-        $this->progress = $progress;
+        $this->progress = max(min(0, $progress), 100);
+        return $this;
+    }
+
+    /**
+     * @return Project
+     */
+    public function getProject() {
+        return $this->project;
+    }
+
+    /**
+     * @param Project $project
+     * @return Task
+     */
+    public function setProject($project) {
+        $this->project = $project;
+        return $this;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTimeHoursEstimate() {
+        return $this->timeHoursEstimate;
+    }
+
+    /**
+     * @param float $timeHoursEstimate
+     * @return Task
+     */
+    public function setTimeHoursEstimate($timeHoursEstimate) {
+        $this->timeHoursEstimate = $timeHoursEstimate;
+        return $this;
     }
 }

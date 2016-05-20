@@ -1,0 +1,35 @@
+{% extends 'base_authorized.html.twig' %}
+
+{% block content %}
+    {% if tasks is empty %}
+        <div>Задач пока нет</div>
+    {% else %}
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Заголовок</th>
+                <th>Заказчик</th>
+                <th>Исполнитель</th>
+                <th>Прогресс задачи</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for task in tasks %}
+                <tr>
+                    <td>{{ task.getTitle }}</td>
+                    <td>{{ task.getCustomer.getFullName }}</td>
+                    <td>{{ task.getPerformer.getFullName is defined ? ask.getPerformer.getFullName : 'отсутствует'}}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar {{ task.getProgress != 100 ? 'progress-bar-striped active' : '' }}" role="progressbar" aria-valuenow="{{ task.getProgress }}"
+                                 aria-valuemin="0" aria-valuemax="100" style="width:{{ task.getProgress }}%">
+                                <span class="sr-only">70%</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

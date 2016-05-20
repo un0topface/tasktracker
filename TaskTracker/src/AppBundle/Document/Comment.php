@@ -6,7 +6,7 @@ use DateTime;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**
- * @MongoDB\Document
+ * @MongoDB\Document(repositoryClass="AppBundle\Repository\CommentRepository")
  * @MongoDB\HasLifecycleCallbacks()
  */
 class Comment {
@@ -14,12 +14,6 @@ class Comment {
      * @MongoDB\Id(strategy="auto")
      */
     protected $id;
-
-    /**
-     * @MongoDB\String
-     * @var string
-     */
-    protected $title;
 
     /**
      * @MongoDB\String
@@ -52,22 +46,10 @@ class Comment {
     protected $updated;
 
     /**
-     * @MongoDB\String
-     * @var string
+     * @MongoDB\Hash)
+     * @var array
      */
-    protected $deadline;
-
-    /**
-     * @MongoDB\Integer
-     * @var int
-     */
-    protected $priorityLevel;
-
-    /**
-     * @MongoDB\Integer
-     * @var int
-     */
-    protected $progress;
+    protected $log;
 
     /**
      * @MongoDB\prePersist
@@ -96,22 +78,6 @@ class Comment {
      */
     public function setId($id) {
         $this->id = $id;
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    public function getTitle() {
-        return $this->title;
-    }
-
-    /**
-     * @param string $title
-     * @return Comment
-     */
-    public function setTitle($title) {
-        $this->title = $title;
         return $this;
     }
 
@@ -196,50 +162,18 @@ class Comment {
     }
 
     /**
-     * @return string
+     * @return array
      */
-    public function getDeadline() {
-        return $this->deadline;
+    public function getLog() {
+        return $this->log;
     }
 
     /**
-     * @param string $deadline
+     * @param array $log
      * @return Comment
      */
-    public function setDeadline($deadline) {
-        $this->deadline = $deadline;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getPriorityLevel() {
-        return $this->priorityLevel;
-    }
-
-    /**
-     * @param int $priorityLevel
-     * @return Comment
-     */
-    public function setPriorityLevel($priorityLevel) {
-        $this->priorityLevel = $priorityLevel;
-        return $this;
-    }
-
-    /**
-     * @return int
-     */
-    public function getProgress() {
-        return $this->progress;
-    }
-
-    /**
-     * @param int $progress
-     * @return Comment
-     */
-    public function setProgress($progress) {
-        $this->progress = $progress;
+    public function setLog($log) {
+        $this->log = $log;
         return $this;
     }
 }
