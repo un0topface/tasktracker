@@ -37,7 +37,7 @@ class ProjectController extends Controller
 
         /** @var Project $project */
         $project = $projectRepo->find($selectedProjectId);
-        $tasks = $taskRepo->findAllByProject($project);
+        $tasks   = $taskRepo->findAllByProject($project);
 
         return $this->render('project/index.html.twig', [
             'tasks'               => $tasks,

@@ -21,8 +21,8 @@ class TaskRepository extends DocumentRepository
     public function findAllByProject(Project $project)
     {
         return $this->createQueryBuilder()
-            ->field('project')
-            ->references($project)->getQuery()
+            ->field('project')->references($project)
+            ->getQuery()
             ->execute();
     }
 }
