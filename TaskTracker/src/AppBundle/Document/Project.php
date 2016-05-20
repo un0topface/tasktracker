@@ -9,7 +9,8 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  * @MongoDB\Document(repositoryClass="AppBundle\Repository\ProjectRepository")
  * @MongoDB\HasLifecycleCallbacks()
  */
-class Project {
+class Project
+{
     /**
      * @MongoDB\Id(strategy="auto")
      */
@@ -30,7 +31,8 @@ class Project {
     /**
      * @return mixed
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -38,15 +40,18 @@ class Project {
      * @param mixed $id
      * @return Project
      */
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
+
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getName() {
+    public function getName()
+    {
         return $this->name;
     }
 
@@ -54,15 +59,18 @@ class Project {
      * @param string $name
      * @return Project
      */
-    public function setName($name) {
+    public function setName($name)
+    {
         $this->name = $name;
+
         return $this;
     }
 
     /**
      * @return User
      */
-    public function getAuthor() {
+    public function getAuthor()
+    {
         return $this->author;
     }
 
@@ -70,8 +78,10 @@ class Project {
      * @param User $author
      * @return Project
      */
-    public function setAuthor($author) {
+    public function setAuthor($author)
+    {
         $this->author = $author;
+
         return $this;
     }
 }

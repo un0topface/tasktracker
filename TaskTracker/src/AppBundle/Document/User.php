@@ -10,7 +10,8 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  * @MongoDB\Document
  * @MongoDB\HasLifecycleCallbacks()
  */
-class User extends BaseUser {
+class User extends BaseUser
+{
     /**
      * @MongoDB\Id(strategy="auto")
      */
@@ -28,7 +29,8 @@ class User extends BaseUser {
      */
     protected $created;
 
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         // your own logic
     }
@@ -36,14 +38,16 @@ class User extends BaseUser {
     /**
      * @MongoDB\prePersist
      */
-    public function prePersist() {
+    public function prePersist()
+    {
         $this->setCreated((new DateTime())->format('Y-m-d H:i:s'));
     }
 
     /**
      * @return string
      */
-    public function getCreated() {
+    public function getCreated()
+    {
         return $this->created;
     }
 
@@ -51,7 +55,8 @@ class User extends BaseUser {
      * @param string $created
      * @return $this
      */
-    public function setCreated($created) {
+    public function setCreated($created)
+    {
         $this->created = $created;
 
         return $this;
@@ -60,7 +65,8 @@ class User extends BaseUser {
     /**
      * @return string
      */
-    public function getFullName() {
+    public function getFullName()
+    {
         return $this->fullName;
     }
 
@@ -68,7 +74,8 @@ class User extends BaseUser {
      * @param string $fullName
      * @return $this
      */
-    public function setFullName($fullName) {
+    public function setFullName($fullName)
+    {
         $this->fullName = $fullName;
 
         return $this;

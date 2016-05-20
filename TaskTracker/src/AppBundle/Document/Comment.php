@@ -9,7 +9,8 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
  * @MongoDB\Document(repositoryClass="AppBundle\Repository\CommentRepository")
  * @MongoDB\HasLifecycleCallbacks()
  */
-class Comment {
+class Comment
+{
     /**
      * @MongoDB\Id(strategy="auto")
      */
@@ -54,21 +55,24 @@ class Comment {
     /**
      * @MongoDB\prePersist
      */
-    public function prePersist() {
+    public function prePersist()
+    {
         $this->setCreated((new DateTime())->format('Y-m-d H:i:s'));
     }
 
     /**
      * @MongoDB\PreUpdate()
      */
-    public function preUpdate() {
+    public function preUpdate()
+    {
         $this->setUpdated((new DateTime())->format('Y-m-d H:i:s'));
     }
 
     /**
      * @return mixed
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -76,15 +80,18 @@ class Comment {
      * @param mixed $id
      * @return Comment
      */
-    public function setId($id) {
+    public function setId($id)
+    {
         $this->id = $id;
+
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getMessage() {
+    public function getMessage()
+    {
         return $this->message;
     }
 
@@ -92,15 +99,18 @@ class Comment {
      * @param string $message
      * @return Comment
      */
-    public function setMessage($message) {
+    public function setMessage($message)
+    {
         $this->message = $message;
+
         return $this;
     }
 
     /**
      * @return User
      */
-    public function getAuthor() {
+    public function getAuthor()
+    {
         return $this->author;
     }
 
@@ -108,15 +118,18 @@ class Comment {
      * @param User $author
      * @return Comment
      */
-    public function setAuthor($author) {
+    public function setAuthor($author)
+    {
         $this->author = $author;
+
         return $this;
     }
 
     /**
      * @return Task
      */
-    public function getTask() {
+    public function getTask()
+    {
         return $this->task;
     }
 
@@ -124,15 +137,18 @@ class Comment {
      * @param Task $task
      * @return Comment
      */
-    public function setTask($task) {
+    public function setTask($task)
+    {
         $this->task = $task;
+
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getCreated() {
+    public function getCreated()
+    {
         return $this->created;
     }
 
@@ -140,15 +156,18 @@ class Comment {
      * @param string $created
      * @return Comment
      */
-    public function setCreated($created) {
+    public function setCreated($created)
+    {
         $this->created = $created;
+
         return $this;
     }
 
     /**
      * @return string
      */
-    public function getUpdated() {
+    public function getUpdated()
+    {
         return $this->updated;
     }
 
@@ -156,15 +175,18 @@ class Comment {
      * @param string $updated
      * @return Comment
      */
-    public function setUpdated($updated) {
+    public function setUpdated($updated)
+    {
         $this->updated = $updated;
+
         return $this;
     }
 
     /**
      * @return array
      */
-    public function getLog() {
+    public function getLog()
+    {
         return $this->log;
     }
 
@@ -172,8 +194,10 @@ class Comment {
      * @param array $log
      * @return Comment
      */
-    public function setLog($log) {
+    public function setLog($log)
+    {
         $this->log = $log;
+
         return $this;
     }
 }
