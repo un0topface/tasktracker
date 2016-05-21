@@ -47,6 +47,12 @@ class Task
     protected $project;
 
     /**
+     * @MongoDB\ReferenceMany(targetDocument="Comment", mappedBy="task")
+     * @var Comment[]
+     */
+    protected $comments;
+
+    /**
      * @MongoDB\String
      * @var string
      */
@@ -83,6 +89,12 @@ class Task
     protected $progress;
 
     /**
+     * @MongoDB\String
+     * @var string
+     */
+    protected $status;
+
+    /**
      * @MongoDB\prePersist
      */
     public function prePersist()
@@ -96,6 +108,38 @@ class Task
     public function preUpdate()
     {
         $this->setUpdated((new DateTime())->format('Y-m-d H:i:s'));
+    }
+
+    /**
+     * @return array
+     * @see $this->status
+     */
+    public function getAvailableStatuses()
+    {
+        $statuses = [
+            'new'           => 'Новая',
+            'in_progress'   => 'Выполняется',
+            'postponed'     => 'Отложена',
+            'closed'        => 'Закрыта',
+            'denied'        => 'Отклонена',
+        ];
+
+        return $statuses;
+    }
+
+    /**
+     * @param string $key
+     * @return string
+     */
+    public function getFieldTranslation($key)
+    {
+        return [
+            'title'             =>  'Название',
+            'timeHoursEstimate' =>  'Оценка времени',
+            'priorityLevel'     =>  'Приоритет',
+            'progress'          =>  'Готовность',
+            'status'            =>  'Статус',
+        ][$key];
     }
 
     /**
@@ -262,6 +306,10 @@ class Task
      */
     public function getPriorityLevel()
     {
+        if (empty($this->priorityLevel)) {
+            return 3;
+        }
+
         return $this->priorityLevel;
     }
 
@@ -331,5 +379,60 @@ class Task
         $this->timeHoursEstimate = $timeHoursEstimate;
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStatus()
+    {
+        if (empty($this->status)) {
+            return $this->getAvailableStatuses()['new'];
+        }
+        return $this->status;
+    }
+
+    /**
+     * @param string $status
+     * @return Task
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * @return Comment[]
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
+     * @param Comment[] $comments
+     * @return Task
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function export()
+    {
+        return [
+             'title'             =>  $this->title,
+             'timeHoursEstimate' =>  $this->timeHoursEstimate,
+             'priorityLevel'     =>  $this->priorityLevel,
+             'progress'          =>  $this->progress,
+             'status'            =>  $this->status,
+        ];
     }
 }

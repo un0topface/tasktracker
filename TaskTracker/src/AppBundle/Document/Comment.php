@@ -29,7 +29,7 @@ class Comment
     protected $author;
 
     /**
-     * @MongoDB\ReferenceOne(targetDocument="Task")
+     * @MongoDB\ReferenceOne(targetDocument="Task", inversedBy="comments")
      * @var Task
      */
     protected $task;
@@ -83,7 +83,6 @@ class Comment
     public function setId($id)
     {
         $this->id = $id;
-
         return $this;
     }
 
@@ -102,7 +101,6 @@ class Comment
     public function setMessage($message)
     {
         $this->message = $message;
-
         return $this;
     }
 
@@ -121,7 +119,6 @@ class Comment
     public function setAuthor($author)
     {
         $this->author = $author;
-
         return $this;
     }
 
@@ -140,7 +137,6 @@ class Comment
     public function setTask($task)
     {
         $this->task = $task;
-
         return $this;
     }
 
@@ -159,7 +155,6 @@ class Comment
     public function setCreated($created)
     {
         $this->created = $created;
-
         return $this;
     }
 
@@ -178,7 +173,6 @@ class Comment
     public function setUpdated($updated)
     {
         $this->updated = $updated;
-
         return $this;
     }
 
@@ -197,7 +191,6 @@ class Comment
     public function setLog($log)
     {
         $this->log = $log;
-
         return $this;
     }
 }

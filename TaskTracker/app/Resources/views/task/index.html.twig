@@ -1,0 +1,72 @@
+{% extends 'base_authorized.html.twig' %}
+
+{% block content %}
+    <h3>{{ task.getTitle }}</h3>
+    <div class="panel panel-default comment">
+        <div class="panel-heading">
+                <b style="font-size: 15px; font-weight: 500;">{{ task.getCustomer.getFullName }}</b>
+                <small>{{ task.getCreated }}</small>
+            <div class="pull-right">
+                <a href="#" class="glyphicon glyphicon-pencil"></a>
+            </div>
+        </div>
+
+        <div class="panel-body">
+            <table class="table borderless task-meta-table">
+                <tr>
+                    <td>Статус: </td><td>{{ task.getStatus }}</td>
+                    <td style="width:30px"></td>
+                    <td>Создана: </td><td>{{ task.getCreated }}</td>
+                </tr>
+                <tr>
+                    <td>Приоритет: </td><td>{{ task.getPriorityLevel }}</td>
+                    <td style="width:30px"></td>
+                    <td>Крайний срок: </td><td>{{ task.getDeadLine != '' ? task.getDeadLine : '-'}}</td>
+                </tr>
+                <tr>
+                    <td>Назначена: </td><td>{{ not task.getPerformer.getFullName is defined ? '-' : task.getPerformer.getFullName }}</td>
+                    <td style="width:30px"></td><td>Готовность: </td><td>
+                        <div class="progress">
+                            <div class="progress-bar {{ task.getProgress != 100 ? 'progress-bar-striped active' : '' }}" role="progressbar" aria-valuenow="{{ task.getProgress }}"
+                                 aria-valuemin="0" aria-valuemax="100" style="width:{{ task.getProgress }}%">
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Заказчик: </td><td>{{ task.getCustomer.getFullName }}</td>
+                    <td style="width:30px"></td>
+                    <td>Оценка времени: </td><td>{{ task.timeHoursEstimate ? : '-' }}</td>
+                </tr>
+            </table>
+            <hr/>
+            <div class="well well-lg">{{ task.getMessage }}</div>
+        </div>
+    </div>
+
+    {% for comment in task.getComments %}
+        {% if comment.getMessage %}
+        <div class="panel panel-default comment">
+            <div class="panel-heading">
+                <b style="font-size: 15px; font-weight: 500;">{{ comment.getAuthor.getFullName }}</b>
+                <small>{{ comment.getCreated }}</small>
+            </div>
+
+            <div class="panel-body">
+                {{ comment.getMessage }}
+            </div>
+        </div>
+        {% endif %}
+
+        <ul class="timeline">
+            {% for k, v in comment.getLog %}
+                <li>
+                    <div class="timeline-content">
+                        <h5>{{ task.getFieldTranslation(k) }}</h5>
+                        <p>{{ v['old'] }} → {{ v['new'] }}</p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endfor %}
+{% endblock %}
