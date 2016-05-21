@@ -47,7 +47,7 @@ class Comment
     protected $updated;
 
     /**
-     * @MongoDB\Hash)
+     * @MongoDB\Hash
      * @var array
      */
     protected $log;
