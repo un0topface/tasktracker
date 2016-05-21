@@ -33,7 +33,6 @@ class TaskController extends Controller
 
         /** @var Task $task */
         $task = $taskRepo->find($selectedTaskId);
-//        $this->createCommentAction();
         return $this->render('task/index.html.twig', [
             'task'                => $task,
             'selectedProjectId'   => $task->getProject()->getId(),

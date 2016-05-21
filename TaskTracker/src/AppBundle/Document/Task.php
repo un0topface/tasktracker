@@ -47,7 +47,7 @@ class Task
     protected $project;
 
     /**
-     * @MongoDB\ReferenceMany(targetDocument="Comment", mappedBy="task")
+     * @MongoDB\ReferenceMany(targetDocument="Comment", mappedBy="task", sort={"created": "ASC"})
      * @var Comment[]
      */
     protected $comments;
