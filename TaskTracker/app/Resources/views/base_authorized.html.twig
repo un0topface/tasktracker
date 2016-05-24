@@ -1,12 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {{ render(controller('AppBundle:Default:showMenu', {'selectedProjectId': selectedProjectId})) }}
+    {% if selectedProjectId is defined %}
+        {{ render(controller('AppBundle:Default:showMenu', {'selectedProjectId': selectedProjectId })) }}
+    {% else %}
+        {{ render(controller('AppBundle:Default:showMenu', {'selectedProjectId': '' })) }}
+    {% endif %}
     <div class="page-container row">
         <div class="col-md-2">
             <ul class="nav nav-pills nav-stacked">
-                <li><a href="/profile" title="Girls"><i class="glyphicon glyphicon-user small"></i>Мой профиль</a></li>
-                <li><a href="/users" title="Search"><i class="glyphicon glyphicon-search small"></i>Сотрудники</a></li>
+                <li><a href="/profile" title="Мой профиль"><i class="glyphicon glyphicon-user"></i>Мой профиль</a></li>
+                <li><a href="/tasks/my" title="Мои задачи"><i class="glyphicon glyphicon-asterisk"></i>Мои задачи</a></li>
+                {% if selectedProjectId is defined and selectedProjectId != '' %}
+                    <li><a href="/project/{{ selectedProjectId }}/createTask" title="Создать задачу"><i class="glyphicon glyphicon-plus"></i>Создать задачу</a></li>
+                {% endif %}
             </ul>
         </div>
         <div class="col-md-10">

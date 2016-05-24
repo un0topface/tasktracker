@@ -95,13 +95,16 @@ class TaskController extends Controller
             }
         }
 
-        // постим коммент
-        $comment = new Comment();
-        $comment->setTask($task)
-            ->setAuthor($this->getUser())
-            ->setLog($logs);
-        $dm->persist($comment);
-        $dm->flush();
+        if (!empty($logs)) {
+            // постим коммент
+            $comment = new Comment();
+            $comment->setTask($task)
+                ->setAuthor($this->getUser())
+                ->setLog($logs);
+            $dm->persist($comment);
+            $dm->flush();
+        }
+
         return $this->redirectToRoute('selectedTask', ['selectedTaskId' => $taskId]);
     }
     /**

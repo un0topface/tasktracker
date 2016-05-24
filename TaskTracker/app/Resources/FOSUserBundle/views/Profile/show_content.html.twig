@@ -1,0 +1,10 @@
+{% extends 'base_authorized.html.twig' %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block content %}
+
+    <p>{{ 'profile.show.username'|trans }}: {{ user.username }}</p>
+    <p>{{ 'profile.show.email'|trans }}: {{ user.email }}</p>
+    <p>{{ 'Полное имя'|trans }}: {{ user.fullName }}</p>
+{% endblock %}

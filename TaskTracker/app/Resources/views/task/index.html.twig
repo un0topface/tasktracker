@@ -7,10 +7,10 @@
             <b style="font-size: 15px; font-weight: 500;">{{ task.getCustomer.getFullName }}</b>
             <small>{{ task.getCreated }}</small>
             <div class="pull-right">
-                <a href="#" class="simpleTask glyphicon glyphicon-pencil" onclick="$('.editTask').toggle();$('.simpleTask').toggle();"></a>
-                <a href="#" class="editTask glyphicon glyphicon-floppy-disk" onclick="$('#saveTaskForm').submit();"></a>
+                <a class="simpleTask glyphicon glyphicon-pencil pointer" onclick="$('.editTask').toggle();$('.simpleTask').toggle();"></a>
+                <a class="editTask glyphicon glyphicon-floppy-disk pointer" onclick="$('#saveTaskForm').submit();"></a>
                 <i class="editTask">&nbsp;</i>
-                <a href="#" class="editTask glyphicon glyphicon-ban-circle" onclick="$('.editTask').toggle();$('.simpleTask').toggle();"></a>
+                <a class="editTask glyphicon glyphicon-ban-circle pointer" onclick="$('.editTask').toggle();$('.simpleTask').toggle();"></a>
             </div>
         </div>
 
@@ -81,7 +81,7 @@
                     </tr>
                 </table>
                 <hr/>
-                <div class="well well-lg"><span class="simpleTask">{{ task.getMessage }}</span><textarea name="message" class="editTask form-control" style="width:100%; height: 150px;">{{ task.getMessage }}</textarea></div>
+                <div class="well well-lg"><span class="simpleTask">{{ task.getMessage | nl2br }}</span><textarea name="message" class="editTask form-control" style="width:100%; height: 150px;">{{ task.getMessage }}</textarea></div>
             </form>
         </div>
     </div>
@@ -101,6 +101,13 @@
         {% endif %}
 
         <ul class="timeline">
+            <li>
+                <div class="timeline-content">
+                    {% if not comment.getMessage %}
+                        <small>Обновлено: {{ comment.getCreated }}</small>
+                    {% endif %}
+                </div>
+            </li>
             {% for k, v in comment.getLog %}
                 <li>
                     <div class="timeline-content">

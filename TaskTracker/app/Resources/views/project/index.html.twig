@@ -7,6 +7,7 @@
         <table class="table table-striped table-bordered">
             <thead>
             <tr>
+                <th>Проект</th>
                 <th>Статус</th>
                 <th>Заголовок</th>
                 <th>Создана</th>
@@ -18,13 +19,14 @@
             <tbody>
             {% for task in tasks %}
                 <tr>
+                    <td><a href="/project/{{ task.getProject.getId }}">{{ task.getProject.getName }}</a></td>
                     <td>{{ task.getStatus }}</td>
                     <td><a href="/task/{{ task.getId }}">{{ task.getTitle }}</a></td>
                     <td>{{ task.getCreated | date('Y-m-d') }}</td>
                     <td>{{ task.getCustomer.getFullName }}</td>
                     <td>{{ task.getPerformer.getFullName is defined ? task.getPerformer.getFullName : 'отсутствует'}}</td>
                     <td>
-                        <div class="progress">
+                        <div class="progress" style="margin-bottom: 0px;">
                             <div class="progress-bar {{ task.getProgress != 100 ? 'progress-bar-striped active' : '' }}" role="progressbar" aria-valuenow="{{ task.getProgress }}"
                                  aria-valuemin="0" aria-valuemax="100" style="width:{{ task.getProgress }}%">
                             </div>

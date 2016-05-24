@@ -1,0 +1,79 @@
+{% extends 'base_authorized.html.twig' %}
+
+{% block content %}
+    <a style="margin-bottom: 15px;" href="javascript:history.back()">Назад</a>
+
+    <script>
+        $(function(){
+            $('#title').focus();
+        });
+    </script>
+    <div class="panel panel-default comment">
+        <form id="saveTaskForm" method="post" action="/project/{{ selectedProjectId }}/createTask/save">
+            <div class="panel-body">
+                <h5>Название задачи в проекте <a href="/project/{{ selectedProjectId }}" class="text-error">{{ project.getName }}</a>: </h5> <input type="text" placeholder="" size="40" id="title" name="title"/>
+                <hr/>
+                <table class="table borderless task-meta-table">
+                    <tr>
+                        <td>Статус: </td>
+                        <td>
+                            <select name="status" class="createTask">
+                                {% for k, v in task.getAvailableStatuses %}
+                                    <option value="{{ v }}">{{ v }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td style="width:30px"></td>
+                        <td>Создана: </td><td>{{  "now"|date("Y-m-d H:i:s") }}</td>
+                    </tr>
+                    <tr>
+                        <td>Приоритет: </td><td><input type="number" class="createTask" name="priorityLevel" min="0" max="5" step="1" value="{{ task.getPriorityLevel ? : 0 }}"/></td>
+                        <td style="width:30px"></td>
+                        <td>Крайний срок: </td><td><input type="date" class="createTask" name="deadLine" value="{{ task.getDeadLine }}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Назначена: </td>
+                        <td>
+                            <select name="performer" class="createTask">
+                                {% for user in users %}
+                                    <option value="{{ user.getId }}" {{ ((task.getPerformer.getFullName is defined) and (user.getId == task.getPerformer.getId)) ? 'selected' : ''}}>{{ user.getFullName }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td style="width:30px"></td><td>Прогресс: </td><td>
+                            <select name="progress" class="createTask">
+                                <option value="0" {{ task.getProgress == 0 ? 'selected' : '' }}>0%</option>
+                                <option value="10" {{ task.getProgress == 10 ? 'selected' : '' }}>10%</option>
+                                <option value="20" {{ task.getProgress == 20 ? 'selected  : '}}>20%</option>
+                                <option value="30" {{ task.getProgress == 30 ? 'selected  : '}}>30%</option>
+                                <option value="40" {{ task.getProgress == 40 ? 'selected  : '}}>40%</option>
+                                <option value="50" {{ task.getProgress == 50 ? 'selected  : '}}>50%</option>
+                                <option value="60" {{ task.getProgress == 60 ? 'selected  : '}}>60%</option>
+                                <option value="70" {{ task.getProgress == 70 ? 'selected  : '}}>70%</option>
+                                <option value="80" {{ task.getProgress == 90 ? 'selected  : '}}>80%</option>
+                                <option value="90" {{ task.getProgress == 90 ? 'selected  : '}}>90%</option>
+                                <option value="100" {{ task.getProgress == 100 ? 'selected  : '}}>100%</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Заказчик: </td>
+                        <td>
+                            <select name="customer" class="createTask">
+                                {% for user in users %}
+                                    <option value="{{ user.getId }}" {{ user.getId == app.getUser.getId ? 'selected' : ''}}>{{ user.getFullName }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td style="width:30px"></td>
+                        <td>Оценка времени: </td><td><input type="number" class="createTask" name="timeHoursEstimate" min="0" step="1" value="{{ task.timeHoursEstimate ? : 0 }}"/></td>
+                    </tr>
+                </table>
+                <hr/>
+                <div class="well well-lg"><span class="simpleTask">{{ task.getMessage | nl2br }}</span><textarea name="message" class="createTask form-control" style="width:100%; height: 150px;" placeholder="Опишите суть задачи">{{ task.getMessage }}</textarea></div>
+                <input type="submit" class="btn btn-success pull-right" name="save" value="Создать задачу" />
+            </div>
+        </form>
+    </div>
+
+{% endblock %}

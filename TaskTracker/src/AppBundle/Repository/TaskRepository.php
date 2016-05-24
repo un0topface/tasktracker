@@ -4,6 +4,7 @@ namespace AppBundle\Repository;
 
 use AppBundle\Document\Project;
 use AppBundle\Document\Task;
+use AppBundle\Document\User;
 use Doctrine\ODM\MongoDB\DocumentRepository;
 
 /**
@@ -22,6 +23,20 @@ class TaskRepository extends DocumentRepository
     {
         return $this->createQueryBuilder()
             ->field('project')->references($project)
+            ->sort('created', -1)
+            ->getQuery()
+            ->execute();
+    }
+
+    /**
+     * @param User $user
+     * @return Task|null
+     */
+    public function findAllByUser(User $user)
+    {
+        return $this->createQueryBuilder()
+            ->field('performer')->references($user)
+            ->sort('created', -1)
             ->getQuery()
             ->execute();
     }
