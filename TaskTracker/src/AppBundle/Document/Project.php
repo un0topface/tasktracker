@@ -2,7 +2,6 @@
 
 namespace AppBundle\Document;
 
-use DateTime;
 use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 
 /**

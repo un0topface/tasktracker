@@ -9,6 +9,7 @@
             <tr>
                 <th>Статус</th>
                 <th>Заголовок</th>
+                <th>Создана</th>
                 <th>Заказчик</th>
                 <th>Исполнитель</th>
                 <th>Прогресс задачи</th>
@@ -19,8 +20,9 @@
                 <tr>
                     <td>{{ task.getStatus }}</td>
                     <td><a href="/task/{{ task.getId }}">{{ task.getTitle }}</a></td>
+                    <td>{{ task.getCreated | date('Y-m-d') }}</td>
                     <td>{{ task.getCustomer.getFullName }}</td>
-                    <td>{{ task.getPerformer.getFullName is defined ? ask.getPerformer.getFullName : 'отсутствует'}}</td>
+                    <td>{{ task.getPerformer.getFullName is defined ? task.getPerformer.getFullName : 'отсутствует'}}</td>
                     <td>
                         <div class="progress">
                             <div class="progress-bar {{ task.getProgress != 100 ? 'progress-bar-striped active' : '' }}" role="progressbar" aria-valuenow="{{ task.getProgress }}"

@@ -4,43 +4,85 @@
     <h3>{{ task.getTitle }}</h3>
     <div class="panel panel-default comment">
         <div class="panel-heading">
-                <b style="font-size: 15px; font-weight: 500;">{{ task.getCustomer.getFullName }}</b>
-                <small>{{ task.getCreated }}</small>
+            <b style="font-size: 15px; font-weight: 500;">{{ task.getCustomer.getFullName }}</b>
+            <small>{{ task.getCreated }}</small>
             <div class="pull-right">
-                <a href="#" class="glyphicon glyphicon-pencil"></a>
+                <a href="#" class="simpleTask glyphicon glyphicon-pencil" onclick="$('.editTask').toggle();$('.simpleTask').toggle();"></a>
+                <a href="#" class="editTask glyphicon glyphicon-floppy-disk" onclick="$('#saveTaskForm').submit();"></a>
+                <i class="editTask">&nbsp;</i>
+                <a href="#" class="editTask glyphicon glyphicon-ban-circle" onclick="$('.editTask').toggle();$('.simpleTask').toggle();"></a>
             </div>
         </div>
 
         <div class="panel-body">
-            <table class="table borderless task-meta-table">
-                <tr>
-                    <td>Статус: </td><td>{{ task.getStatus }}</td>
-                    <td style="width:30px"></td>
-                    <td>Создана: </td><td>{{ task.getCreated }}</td>
-                </tr>
-                <tr>
-                    <td>Приоритет: </td><td>{{ task.getPriorityLevel }}</td>
-                    <td style="width:30px"></td>
-                    <td>Крайний срок: </td><td>{{ task.getDeadLine != '' ? task.getDeadLine : '-'}}</td>
-                </tr>
-                <tr>
-                    <td>Назначена: </td><td>{{ not task.getPerformer.getFullName is defined ? '-' : task.getPerformer.getFullName }}</td>
-                    <td style="width:30px"></td><td>Готовность: </td><td>
-                        <div class="progress">
-                            <div class="progress-bar {{ task.getProgress != 100 ? 'progress-bar-striped active' : '' }}" role="progressbar" aria-valuenow="{{ task.getProgress }}"
-                                 aria-valuemin="0" aria-valuemax="100" style="width:{{ task.getProgress }}%">
+            <form id="saveTaskForm" method="post" action="/task/{{ task.getId }}/edit">
+                <table class="table borderless task-meta-table">
+                    <tr>
+                        <td>Статус: </td>
+                        <td>
+                            <select name="status" class="editTask">
+                                {% for k, v in task.getAvailableStatuses %}
+                                    <option value="{{ v }}" {{ task.getStatus == k  ? 'selected' : ''}}>{{ v }}</option>
+                                {% endfor %}
+                            </select>
+                            <span class="simpleTask">{{ task.getStatus }}</span>
+                        </td>
+                        <td style="width:30px"></td>
+                        <td>Создана: </td><td>{{ task.getCreated }}</td>
+                    </tr>
+                    <tr>
+                        <td>Приоритет: </td><td><span class="simpleTask">{{ task.getPriorityLevel }}</span><input type="number" class="editTask" name="priorityLevel" min="0" max="5" step="1" value="{{ task.getPriorityLevel ? : 0 }}"/></td>
+                        <td style="width:30px"></td>
+                        <td>Крайний срок: </td><td><span class="simpleTask">{{ task.getDeadLine != '' ? task.getDeadLine : '-'}}</span><input type="date" class="editTask" name="deadLine" value="{{ task.getDeadLine }}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Назначена: </td>
+                        <td>
+                            <select name="performer" class="editTask">
+                                {% for user in users %}
+                                    <option value="{{ user.getId }}" {{ ((task.getPerformer.getFullName is defined) and (user.getId == task.getPerformer.getId)) ? 'selected' : ''}}>{{ user.getFullName }}</option>
+                                {% endfor %}
+                            </select>
+                            <span class="simpleTask">{{ not task.getPerformer.getFullName is defined ? '-' : task.getPerformer.getFullName }}</span>
+                        </td>
+                        <td style="width:30px"></td><td>Прогресс: </td><td>
+                            <select name="progress" class="editTask">
+                                <option value="0" {{ task.getProgress == 0 ? 'selected' : '' }}>0%</option>
+                                <option value="10" {{ task.getProgress == 10 ? 'selected' : '' }}>10%</option>
+                                <option value="20" {{ task.getProgress == 20 ? 'selected  : '}}>20%</option>
+                                <option value="30" {{ task.getProgress == 30 ? 'selected  : '}}>30%</option>
+                                <option value="40" {{ task.getProgress == 40 ? 'selected  : '}}>40%</option>
+                                <option value="50" {{ task.getProgress == 50 ? 'selected  : '}}>50%</option>
+                                <option value="60" {{ task.getProgress == 60 ? 'selected  : '}}>60%</option>
+                                <option value="70" {{ task.getProgress == 70 ? 'selected  : '}}>70%</option>
+                                <option value="80" {{ task.getProgress == 90 ? 'selected  : '}}>80%</option>
+                                <option value="90" {{ task.getProgress == 90 ? 'selected  : '}}>90%</option>
+                                <option value="100" {{ task.getProgress == 100 ? 'selected  : '}}>100%</option>
+                            </select>
+                            <div class="progress simpleTask" style="margin-bottom: 0px;">
+                                <div class="progress-bar {{ task.getProgress != 100 ? 'progress-bar-striped active' : '' }}" role="progressbar" aria-valuenow="{{ task.getProgress }}"
+                                     aria-valuemin="0" aria-valuemax="100" style="width:{{ task.getProgress }}%">
+                                </div>
                             </div>
-                        </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Заказчик: </td><td>{{ task.getCustomer.getFullName }}</td>
-                    <td style="width:30px"></td>
-                    <td>Оценка времени: </td><td>{{ task.timeHoursEstimate ? : '-' }}</td>
-                </tr>
-            </table>
-            <hr/>
-            <div class="well well-lg">{{ task.getMessage }}</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Заказчик: </td>
+                        <td>
+                            <select name="customer" class="editTask">
+                                {% for user in users %}
+                                    <option value="{{ user.getId }}" {{ ((task.getCustomer.getFullName is defined) and (user.getId == task.getCustomer.getId)) ? 'selected' : ''}}>{{ user.getFullName }}</option>
+                                {% endfor %}
+                            </select>
+                            <span class="simpleTask">{{ not task.getCustomer.getFullName is defined ? '-' : task.getCustomer.getFullName }}</span>
+                        </td>
+                        <td style="width:30px"></td>
+                        <td>Оценка времени: </td><td><span class="simpleTask">{{ task.timeHoursEstimate ? : '-' }}</span><input type="number" class="editTask" name="timeHoursEstimate" min="0" step="1" value="{{ task.timeHoursEstimate ? : 0 }}"/></td>
+                    </tr>
+                </table>
+                <hr/>
+                <div class="well well-lg"><span class="simpleTask">{{ task.getMessage }}</span><textarea name="message" class="editTask form-control" style="width:100%; height: 150px;">{{ task.getMessage }}</textarea></div>
+            </form>
         </div>
     </div>
 
@@ -63,10 +105,25 @@
                 <li>
                     <div class="timeline-content">
                         <h5>{{ task.getFieldTranslation(k) }}</h5>
-                        <p>{{ v['old'] }} → {{ v['new'] }}</p>
+                        <p><s>{{ v['old'] }}</s> → {{ v['new'] }}</p>
                     </div>
                 </li>
             {% endfor %}
         </ul>
     {% endfor %}
+
+    <div class="panel panel-default comment">
+        <div class="panel-heading">
+            <b style="font-size: 15px; font-weight: 500;">Создать новый комментарий</b>
+        </div>
+
+        <div class="panel-body">
+            <form method="post" action="/task/{{ task.getId }}/comment/post">
+                <textarea name="message" class="form-control" style="width:100%; height: 120px; margin-bottom: 15px;"></textarea>
+                <div class="pull-right">
+                    <input type="submit" class="btn btn-default" value="Отправить" />
+                </div>
+            </form>
+        </div>
+    </div>
 {% endblock %}

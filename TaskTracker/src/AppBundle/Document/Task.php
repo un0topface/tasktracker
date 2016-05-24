@@ -139,6 +139,8 @@ class Task
             'priorityLevel'     =>  'Приоритет',
             'progress'          =>  'Готовность',
             'status'            =>  'Статус',
+            'customer'          =>  'Заказчик',
+            'performer'         =>  'Исполнитель',
         ][$key];
     }
 
@@ -277,7 +279,9 @@ class Task
      */
     public function setCustomer($customer)
     {
-        $this->customer = $customer;
+        if ($customer instanceof User) {
+            $this->customer = $customer;
+        }
 
         return $this;
     }
@@ -296,7 +300,9 @@ class Task
      */
     public function setPerformer($performer)
     {
-        $this->performer = $performer;
+        if ($performer instanceof User) {
+            $this->performer = $performer;
+        }
 
         return $this;
     }
@@ -338,7 +344,7 @@ class Task
      */
     public function setProgress($progress)
     {
-        $this->progress = max(min(0, $progress), 100);
+        $this->progress = min(max(0, $progress), 100);
 
         return $this;
     }
@@ -427,12 +433,23 @@ class Task
      */
     public function export()
     {
-        return [
-             'title'             =>  $this->title,
-             'timeHoursEstimate' =>  $this->timeHoursEstimate,
-             'priorityLevel'     =>  $this->priorityLevel,
-             'progress'          =>  $this->progress,
-             'status'            =>  $this->status,
+        $data =  [
+             'title'             =>  $this->getTitle(),
+             'timeHoursEstimate' =>  $this->getTimeHoursEstimate(),
+             'priorityLevel'     =>  $this->getPriorityLevel(),
+             'progress'          =>  $this->getProgress(),
+             'status'            =>  $this->getStatus(),
+             'deadLine'          =>  $this->getDeadline(),
         ];
+
+        if ($this->getCustomer() instanceof User) {
+            $data['customer'] = $this->getCustomer()->getFullName();
+        }
+
+        if ($this->getPerformer() instanceof User) {
+            $data['performer'] = $this->getPerformer()->getFullName();
+        }
+
+        return $data;
     }
 }

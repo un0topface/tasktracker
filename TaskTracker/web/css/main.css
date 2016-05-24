@@ -113,6 +113,12 @@
     background-color: #fafafa;
 }
 
+.editTask, input.editTask, select.editTask {
+    display: none;
+    height: 20px;
+    width: 130px;
+}
+
 .task-meta-table {
     text-align: left;
 }

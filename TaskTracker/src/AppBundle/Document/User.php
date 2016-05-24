@@ -9,6 +9,7 @@ use Doctrine\ODM\MongoDB\Mapping\Annotations as MongoDB;
 /**
  * @MongoDB\Document
  * @MongoDB\HasLifecycleCallbacks()
+ * @MongoDB\Document(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User extends BaseUser
 {
