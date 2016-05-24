@@ -119,6 +119,11 @@
     width: 130px;
 }
 
+.createTask, input.createTask, select.createTask {
+    height: 20px;
+    width: 130px;
+}
+
 .task-meta-table {
     text-align: left;
 }
@@ -148,4 +153,8 @@
         border-left: 2px #aeaeae solid;
         padding-left: 20px;
     }
+}
+
+.pointer {
+    cursor: pointer;
 }

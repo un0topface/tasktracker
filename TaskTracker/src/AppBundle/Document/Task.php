@@ -138,6 +138,7 @@ class Task
             'timeHoursEstimate' =>  'Оценка времени',
             'priorityLevel'     =>  'Приоритет',
             'progress'          =>  'Готовность',
+            'deadLine'          =>  'Крайний срок',
             'status'            =>  'Статус',
             'customer'          =>  'Заказчик',
             'performer'         =>  'Исполнитель',

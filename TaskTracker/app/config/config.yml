@@ -81,3 +81,7 @@ fos_user:
     db_driver: mongodb
     firewall_name: main
     user_class: AppBundle\Document\User
+
+    registration:
+            form:
+                type: AppBundle\Form\RegistrationType
