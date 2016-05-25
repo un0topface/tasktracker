@@ -23,7 +23,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Route("/project/{selectedProjectId}")
+     * @Route("/project/{selectedProjectId}", name="projectAction")
      * @param string $selectedProjectId id проекта
      * @return \Symfony\Component\HttpFoundation\Response
      */
@@ -130,15 +130,36 @@ class ProjectController extends Controller
         return $this->redirectToRoute('selectedTask', ['selectedTaskId' => $task->getId()]);
     }
 
-//    public function createProjectAction()
-//    {
-//        $project = new Project();
-//        $project->setAuthor($this->getUser())
-//            ->setName('Сетевые проблемы');
-//
-//        /** @var DocumentManager $dm */
-//        $dm = $this->get('doctrine_mongodb')->getManager();
-//        $dm->persist($project);
-//        $dm->flush();
-//    }
+    /**
+     * @Route("/newproject", name="createProjectForm")
+     */
+    public function createProjectForm()
+    {
+        return $this->render('project/createProject.html.twig', [
+            'selectedProjectId'   => '',
+        ]);
+    }
+
+    /**
+     * @Route("/newproject/save", name="saveProjectAction")
+     * @param Request $request
+     */
+    public function saveProjectAction(Request $request)
+    {
+        /** @var User $user */
+        $user = $this->getUser();
+
+        $project = new Project();
+        $project->setAuthor($user)
+            ->setName($request->get('projectName'));
+
+        /** @var DocumentManager $dm */
+        $dm = $this->get('doctrine_mongodb')->getManager();
+        $dm->persist($project);
+        $dm->flush();
+
+        return $this->redirectToRoute('projectAction', [
+            'selectedProjectId' =>  $project->getId()
+        ]);
+    }
 }

@@ -1,0 +1,20 @@
+{% extends 'base_authorized.html.twig' %}
+
+{% block content %}
+    <a style="margin-bottom: 15px;" href="javascript:history.back()">Назад</a>
+
+    <script>
+        $(function(){
+            $('#title').focus();
+        });
+    </script>
+    <div class="panel panel-default comment">
+        <form id="saveProjectForm" method="post" action="/newproject/save">
+            <div class="panel-body">
+                <h5>Название проекта: </h5> <input class="form-control" type="text" placeholder="" id="projectName" name="projectName" style="display:inline-block;width:300px; margin-bottom:15px;"/>
+                <input type="submit" class="btn btn-success" name="save" value="Создать проект" />
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
