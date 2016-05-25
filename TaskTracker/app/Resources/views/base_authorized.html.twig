@@ -11,6 +11,9 @@
             <ul class="nav nav-pills nav-stacked">
                 <li><a href="/profile" title="Мой профиль"><i class="glyphicon glyphicon-user"></i>Мой профиль</a></li>
                 <li><a href="/tasks/my" title="Мои задачи"><i class="glyphicon glyphicon-asterisk"></i>Мои задачи</a></li>
+                {% if app.user.isAdmin %}
+                    <li><a href="/newproject" title="Создать проект"><i class="glyphicon glyphicon-folder-open"></i>Создать проект</a></li>
+                {% endif %}
                 {% if selectedProjectId is defined and selectedProjectId != '' %}
                     <li><a href="/project/{{ selectedProjectId }}/createTask" title="Создать задачу"><i class="glyphicon glyphicon-plus"></i>Создать задачу</a></li>
                 {% endif %}

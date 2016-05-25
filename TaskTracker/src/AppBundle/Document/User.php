@@ -81,4 +81,12 @@ class User extends BaseUser
 
         return $this;
     }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return $this->hasRole(self::ROLE_SUPER_ADMIN);
+    }
 }
